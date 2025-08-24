@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - DATABASE_URL=sqlite:///./data/app.db
+      - SECRET_KEY=change-me
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./backend:/app/backend
+    restart: unless-stopped
