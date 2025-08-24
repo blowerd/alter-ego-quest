@@ -1,0 +1,28 @@
+# .ruff.toml
+target-version = "py311"
+line-length = 100
+extend-exclude = [
+  "data",
+  "backend/app/static",
+  "backend/app/templates",
+]
+
+[lint]
+# Core errors/warnings + import sort + useful upgrades/bugs + ruff-native rules
+select = ["E", "F", "I", "UP", "B", "PL", "PTH", "RUF"]
+# Ignore docstring typing/args annotations for now; we can tighten later.
+ignore = ["E203", "D", "ANN", "ARG"]
+
+[format]
+# If you ever switch to ruff's formatter; we currently use Black. Safe to keep.
+quote-style = "preserve"
+
+[lint.per-file-ignores]
+# Re-export patterns often look like unused imports.
+"backend/app/models/__init__.py" = ["F401"]
+"backend/app/schemas/__init__.py" = ["F401"]
+"backend/app/services/__init__.py" = ["F401"]
+"backend/app/api/__init__.py" = ["F401"]
+"backend/app/api/v1/__init__.py" = ["F401"]
+# Looser rules in tests.
+"backend/tests/*" = ["S101", "ANN"]
